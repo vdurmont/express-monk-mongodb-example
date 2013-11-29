@@ -26,7 +26,7 @@ exports.get = function(req, res) {
 	collection.findById(id, function(err, bug){
 		if (err) res.json(500, err);
 		else if (bug) res.json(bug);
-		else res.json(404);
+		else res.send(404);
 	});
 };
 
@@ -38,7 +38,7 @@ exports.update = function(req, res) {
 	collection.findAndModify({_id: id}, {$set: body}, {multi:false}, function(err, bug){
 		if (err) res.json(500, err);
 		else if (bug) res.json(bug);
-		else res.json(404);
+		else res.send(404);
 	});
 };
 
@@ -47,6 +47,6 @@ exports.del = function(req, res) {
 	var id = req.params.id;
 	collection.remove({_id: id}, function(err){
 		if (err) res.json(500, err);
-		else res.json(204);
+		else res.send(204);
 	});
 };
